@@ -184,7 +184,7 @@ class AliIdCardOCR
      * @param $idNum
      * @return bool
      */
-    public function verifyIdCardInput($face, $username, $idNum)
+    protected static function verifyIdCardInput($face, $username, $idNum)
     {
         return ($face['name'] == $username && $face['num'] == $idNum) ? true : false;
     }
