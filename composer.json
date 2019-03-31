@@ -1,0 +1,31 @@
+{
+    "name": "zev/ali-id-card-ocr",
+    "description": "Ali-id-card-ocr is a laravel package for ID card identification verification through Alibaba Cloud's open API",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Zev",
+            "email": "zwwlife@126.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.0",
+        "laravel/framework": ">=5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zev\\AliIdcardocr\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Zev\\AliIdcardocr\\AliidcardocrServiceProviderr"
+            ],
+            "aliases": {
+                "AliIdcardOcr": "Zev\\AliIdcardocr\\Facade\\AliIdCardOcr"
+            }
+        }
+    }
+}
