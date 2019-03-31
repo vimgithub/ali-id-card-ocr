@@ -5,7 +5,7 @@ namespace Zev\AliIdCardOcr;
 use Illuminate\Support\ServiceProvider;
 
 
-class AliidcardocrServiceProvider extends ServiceProvider
+class AliIdCardOcrServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.

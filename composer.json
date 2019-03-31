@@ -21,7 +21,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Zev\\AliIdCardOcr\\AliidcardocrServiceProviderr"
+                "Zev\\AliIdCardOcr\\AliIdCardOcrServiceProvider"
             ],
             "aliases": {
                 "AliIdCardOcr": "Zev\\AliIdCardOcr\\Facades\\AliIdCardOcr"
