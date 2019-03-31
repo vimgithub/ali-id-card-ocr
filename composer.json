@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Zev\\AliIdcardocr\\": "src/"
+            "Zev\\AliIdCardOcr\\": "src/"
         }
     },
     "extra": {
