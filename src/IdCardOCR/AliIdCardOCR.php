@@ -30,8 +30,8 @@ class AliIdCardOCR
                 return ['code'=>103, 'msg'=>'文件不存在'];
             }
 
-            if($fp = fopen($file, "rb", 0)) {
-                $binary = fread($fp, filesize($file)); // 文件读取
+            if($fp = fopen($path, "rb", 0)) {
+                $binary = fread($fp, filesize($path)); // 文件读取
                 fclose($fp);
                 $base64 = base64_encode($binary); // 转码
             }
