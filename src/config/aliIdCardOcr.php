@@ -22,7 +22,7 @@ return [
     'ocr_url'  => env('OCR_URL','https://dm-51.data.aliyun.com/rest/160601/ocr/ocr_idcard.json'),
 
     // 应用的AppCode
-    'app_code'  => env('OCR_APP_CODE','61a494bcca0d4275b2e6363a7b190d57'),
+    'app_code'  => env('OCR_APP_CODE','your-app-code'),
 
     // 识别文件存储路径
     'file_path'  => storage_path('app/public/upload/'),
