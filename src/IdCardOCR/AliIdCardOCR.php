@@ -155,6 +155,9 @@ class AliIdCardOCR
      */
     public static function idCardVerify($username, $idNum, $face='', $back='', $isBase64 = false)
     {
+
+        $conf = config('is_identity_return');
+
         // 识别验证身份证正面
         $face = self::IdVerify('face', $face, $isBase64);
 
@@ -171,7 +174,7 @@ class AliIdCardOCR
         // 验证证件与输入信息是否一致
         $inputVerify = self::verifyIdCardInput($face['data'], $username, $idNum);
         if (!$inputVerify) {
-            return ['code'=>101, 'msg'=>'输入信息与证件信息不一致'];
+            return ['code'=>101, 'msg'=>'输入信息与证件信息不一致', 'info'=>$conf ? $face['data'] : null];
         }
 
         // 识别验证身份证反面
