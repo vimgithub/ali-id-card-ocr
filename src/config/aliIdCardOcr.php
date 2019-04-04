@@ -25,6 +25,9 @@ return [
     'app_code'  => env('OCR_APP_CODE','your-app-code'),
 
     // 识别文件存储路径
-    'file_path'  => storage_path('app/public/upload/')
+    'file_path'  => storage_path('app/public/upload/'),
+
+    // 是否返回证件信息
+    'is_identity_return' => env('IS_IDENTITY_RETURN', false),
 
 ];

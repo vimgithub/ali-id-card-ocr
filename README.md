@@ -85,6 +85,9 @@ return [
 
     // the face and back file the storage path of face and back file
     'file_path'  => storage_path('app/public/upload/')
+    
+     // Whether to return identity information
+    'is_identity_return' => env('IS_IDENTITY_RETURN', false),
 
 ];
 

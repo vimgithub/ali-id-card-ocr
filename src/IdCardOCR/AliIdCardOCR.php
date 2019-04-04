@@ -187,7 +187,12 @@ class AliIdCardOCR
             return ['code'=>100, 'msg'=>'证件反面识别验证失败'];
         }
 
-        return ['code'=>0, 'msg'=>'验证通过'];
+        // 是否返回证件信息
+        if (config('aliIdCardOcr.is_identity_return')) {
+            $identity = ['face'=>$face['data'],'back'=>$back['data']];
+        }
+
+        return ['code'=>0, 'msg'=>'验证通过', 'data'=>$identity ?? null];
     }
 
 
