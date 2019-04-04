@@ -29,6 +29,8 @@ class ExampleController extends  Controller
     * 识别验证-正/反面-并比对用户输入信息
     * 
     * @param Request $request
+    * @param string $side- face|back
+    * @param bool $isBase64 | default false
     * @return array|\Illuminate\Http\JsonResponse|string
     */
     public function ocrTest(Request $request)
@@ -38,7 +40,8 @@ class ExampleController extends  Controller
             $request->username,
             $request->idNum, 
             $face,
-            $back);
+            $back,
+            $isBase64 = false);
        
         return $res;
     }
@@ -49,13 +52,15 @@ class ExampleController extends  Controller
     * 仅识别验证正/反面信息
     * 
     * @param Request $request
-    * @param $side- face|back
-    * @param $fileName
+    * @param string $side- face|back
+    * @param string $file | file or base64
+    * @param bool $base64 | default false
     * @return array|\Illuminate\Http\JsonResponse|string
     */
-    public function sideOcrTest($side, $fileName)
+    
+    public function sideOcrTest($side, $file, $base64 = false)
     {
-        $res = AliIdCardOCR::IdVerify($side, $fileName)
+        $res = AliIdCardOCR::IdVerify($side, $fileName, $base64)
         
         return $res;
     }
