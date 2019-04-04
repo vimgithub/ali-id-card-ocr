@@ -21,6 +21,8 @@ class AliIdCardOCR
         $url = config('aliIdCardOcr.ocr_url');
         $appCode = config('aliIdCardOcr.app_code');
 
+        $base64 = $base64 ? $file : $base64;
+
         // 文件是否是否存在并转码
         if (!$base64) {
             $path = config('aliIdCardOcr.file_path').$file;
