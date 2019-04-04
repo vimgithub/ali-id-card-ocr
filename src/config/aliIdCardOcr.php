@@ -19,10 +19,10 @@ return [
 
 
     // 认证请求url
-    'ocr_url'  => env('OCR_URL','https://dm-51.data.aliyun.com/rest/160601/ocr/ocr_idcard.json'),
+    'ocr_url'  => env('OCR_URL', 'https://dm-51.data.aliyun.com/rest/160601/ocr/ocr_idcard.json'),
 
     // 应用的AppCode
-    'app_code'  => env('OCR_APP_CODE','your-app-code'),
+    'app_code'  => env('OCR_APP_CODE', 'your-app-code'),
 
     // 识别文件存储路径
     'file_path'  => storage_path('app/public/upload/'),
