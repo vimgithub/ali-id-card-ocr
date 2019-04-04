@@ -156,7 +156,7 @@ class AliIdCardOCR
     public static function idCardVerify($username, $idNum, $face='', $back='', $isBase64 = false)
     {
 
-        $conf = config('is_identity_return');
+        $conf = config('aliIdCardOcr.is_identity_return');
 
         // 识别验证身份证正面
         $face = self::IdVerify('face', $face, $isBase64);
