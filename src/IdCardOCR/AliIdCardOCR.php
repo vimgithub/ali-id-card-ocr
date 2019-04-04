@@ -168,7 +168,7 @@ class AliIdCardOCR
 
         // 身份证正面识别失败
         if (!$face['data']['success']) {
-            return ['code'=>100, 'msg'=>'证件正面识别验证失败'];
+            return ['code'=>100, 'msg'=>'证件正面识别验证失败', 'info'=>$conf ? $face['data'] : null];
         }
 
         // 验证证件与输入信息是否一致
@@ -187,11 +187,11 @@ class AliIdCardOCR
 
         // 身份证反面识别失败
         if (!$back['data']['success']) {
-            return ['code'=>100, 'msg'=>'证件反面识别验证失败'];
+            return ['code'=>100, 'msg'=>'证件反面识别验证失败','info'=>$conf ? $face['data'] : null];
         }
 
         // 是否返回证件信息
-        if (config('aliIdCardOcr.is_identity_return')) {
+        if ($conf) {
             $identity = ['face'=>$face['data'],'back'=>$back['data']];
         }
 
