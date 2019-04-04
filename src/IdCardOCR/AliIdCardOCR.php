@@ -3,6 +3,8 @@
 namespace Zev\AliIdCardOcr\IdCardOCR;
 
 
+use Illuminate\Support\Facades\File;
+
 class AliIdCardOCR
 {
 
@@ -10,14 +12,30 @@ class AliIdCardOCR
      * 身份证识别认证
      *
      * @param $side
-     * @param $fileName
+     * @param $file
+     * @param $base64
      * @return array
      */
-    public static function IdVerify($side, $fileName)
+    public static function IdVerify($side, $file, $base64 = false)
     {
         $url = config('aliIdCardOcr.ocr_url');
         $appCode = config('aliIdCardOcr.app_code');
-        $file = config('aliIdCardOcr.file_path').$fileName;
+
+
+        // 文件是否是否存在并转码
+        if (!$base64) {
+            $path = config('aliIdCardOcr.file_path').$file;
+            if (!File::exists($path)) {
+                return ['code'=>103, 'msg'=>'文件不存在'];
+            }
+
+            if($fp = fopen($file, "rb", 0)) {
+                $binary = fread($fp, filesize($file)); // 文件读取
+                fclose($fp);
+                $base64 = base64_encode($binary); // 转码
+            }
+        }
+
 
         //如果输入带有inputs, 设置为True，否则设为False
         $is_old_format = false;
@@ -25,11 +43,6 @@ class AliIdCardOCR
         //如果没有configure字段，config设为空
         $config = [  "side" => $side ];
 
-        if($fp = fopen($file, "rb", 0)) {
-            $binary = fread($fp, filesize($file)); // 文件读取
-            fclose($fp);
-            $base64 = base64_encode($binary); // 转码
-        }
 
         $headers = self::header($appCode);
         $querys = "";
@@ -136,12 +149,13 @@ class AliIdCardOCR
      * @param $idNum
      * @param string $face
      * @param string $back
+     * @param bool $isBase64
      * @return array|\Illuminate\Http\JsonResponse|string
      */
-    public static function idCardVerify($username, $idNum, $face='', $back='')
+    public static function idCardVerify($username, $idNum, $face='', $back='', $isBase64 = false)
     {
         // 识别验证身份证正面
-        $face = self::IdVerify('face', $face);
+        $face = self::IdVerify('face', $face, $isBase64);
 
         // 请求异常
         if ($face['code'] != 200) {
@@ -160,7 +174,7 @@ class AliIdCardOCR
         }
 
         // 识别验证身份证反面
-        $back = self::IdVerify('back', $back);
+        $back = self::IdVerify('back', $back, $isBase64);
 
         // 请求异常
         if ($back['code'] != 200) {
