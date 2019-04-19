@@ -4,6 +4,7 @@ namespace Zev\AliIdCardOcr\IdCardOCR;
 
 
 use Illuminate\Support\Facades\File;
+use Zev\AliIdCardOcr\Exceptions\ErrorCode;
 
 class AliIdCardOCR
 {
@@ -163,7 +164,7 @@ class AliIdCardOCR
 
         // 请求异常
         if ($face['code'] != 200) {
-            return $face;
+            return ErrorCode::OCR_ERROR[$face['code']] ?? $face;
         }
 
         // 身份证正面识别失败
@@ -182,7 +183,7 @@ class AliIdCardOCR
 
         // 请求异常
         if ($back['code'] != 200) {
-            return $back;
+            return ErrorCode::OCR_ERROR[$back['code']] ?? $back;
         }
 
         // 身份证反面识别失败
